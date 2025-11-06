@@ -1,7 +1,12 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
 
-const Navbar = () => {
+interface NavbarProps {
+  onContactClick?: () => void;
+  onFeedbackClick?: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onContactClick, onFeedbackClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -10,6 +15,22 @@ const Navbar = () => {
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
+  };
+
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onContactClick) {
+      onContactClick();
+    }
+    closeMobileMenu();
+  };
+
+  const handleFeedbackClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onFeedbackClick) {
+      onFeedbackClick();
+    }
+    closeMobileMenu();
   };
 
   return (
@@ -27,14 +48,18 @@ const Navbar = () => {
             <a href="#about" className={styles.navLink}>
               About
             </a>
-            <a href="#contact" className={styles.navLink}>
+            <a
+              href="#contact"
+              className={styles.navLink}
+              onClick={handleContactClick}
+            >
               Contact
             </a>
             <a href="#explore" className={styles.navLink}>
               Explore
             </a>
-            <a href="#work-with-us" className={styles.navLink}>
-              Work With Us
+            <a href="#work-for-us" className={styles.navLink}>
+              Work For Us
             </a>
             <a href="#blog" className={styles.navLink}>
               Blog
@@ -103,7 +128,7 @@ const Navbar = () => {
             <a
               href="#contact"
               className={styles.drawerNavLink}
-              onClick={closeMobileMenu}
+              onClick={handleContactClick}
             >
               Contact
             </a>
@@ -115,11 +140,11 @@ const Navbar = () => {
               Explore
             </a>
             <a
-              href="#work-with-us"
+              href="#work-for-us"
               className={styles.drawerNavLink}
               onClick={closeMobileMenu}
             >
-              Work With Us
+              Work For Us
             </a>
             <a
               href="#blog"

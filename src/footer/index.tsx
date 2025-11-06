@@ -2,7 +2,12 @@ import { useState } from "react";
 import { SocialIcon } from "react-social-icons";
 import styles from "./styles.module.css";
 
-const Footer = () => {
+interface FooterProps {
+  onContactClick?: () => void;
+  onFeedbackClick?: () => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onContactClick, onFeedbackClick }) => {
   const [email, setEmail] = useState("");
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -59,6 +64,20 @@ const Footer = () => {
       setMessage("An error occurred. Please try again.");
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onContactClick) {
+      onContactClick();
+    }
+  };
+
+  const handleFeedbackClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onFeedbackClick) {
+      onFeedbackClick();
     }
   };
 
@@ -185,17 +204,25 @@ const Footer = () => {
             <a href="#about" className={styles.quickLink}>
               About
             </a>
-            <a href="#contact" className={styles.quickLink}>
+            <a
+              href="#contact"
+              className={styles.quickLink}
+              onClick={handleContactClick}
+            >
               Contact
             </a>
-            <a href="#feedback" className={styles.quickLink}>
+            <a
+              href="#feedback"
+              className={styles.quickLink}
+              onClick={handleFeedbackClick}
+            >
               Feedback
             </a>
             <a href="#blog" className={styles.quickLink}>
               Blog
             </a>
-            <a href="#work-with-us" className={styles.quickLink}>
-              Work With Us
+            <a href="#work-for-us" className={styles.quickLink}>
+              Work For Us
             </a>
           </nav>
         </div>

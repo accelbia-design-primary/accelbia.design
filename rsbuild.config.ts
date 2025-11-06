@@ -7,8 +7,8 @@ export default defineConfig({
     favicon: "./public/favicon.ico",
     meta: {
       "theme-color": "#c41d50",
-      "apple-mobile-web-app-capable": "yes",
-      "apple-mobile-web-app-status-bar-style": "default",
+      "mobile-web-app-capable": "yes",
+      "mobile-web-app-status-bar-style": "default",
     },
   },
   source: {
