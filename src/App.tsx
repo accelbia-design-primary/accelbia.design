@@ -4,6 +4,7 @@ import Navbar from "./navbar";
 import Background from "./background";
 import LandingScreen from "./landingScreen";
 import BentoGrid from "./bentoGrid";
+import InfiniteMenu from "./InfiniteMenu";
 import ClientLogos from "./clientLogos";
 import Footer from "./footer";
 import Modal from "./modal";
@@ -17,6 +18,33 @@ const App = () => {
   const openFeedbackModal = () => setIsFeedbackModalOpen(true);
   const closeFeedbackModal = () => setIsFeedbackModalOpen(false);
 
+  const items = [
+    {
+      image: "https://picsum.photos/300/300?grayscale",
+      link: "https://google.com/",
+      title: "Item 1",
+      description: "This is pretty cool, right?",
+    },
+    {
+      image: "https://picsum.photos/400/400?grayscale",
+      link: "https://google.com/",
+      title: "Item 2",
+      description: "This is pretty cool, right?",
+    },
+    {
+      image: "https://picsum.photos/500/500?grayscale",
+      link: "https://google.com/",
+      title: "Item 3",
+      description: "This is pretty cool, right?",
+    },
+    {
+      image: "https://picsum.photos/600/600?grayscale",
+      link: "https://google.com/",
+      title: "Item 4",
+      description: "This is pretty cool, right?",
+    },
+  ];
+
   return (
     <div className="app">
       <Background />
@@ -26,6 +54,11 @@ const App = () => {
       </section>
       <section id="bento">
         <BentoGrid />
+      </section>
+      <section id="infinite-menu">
+        <div style={{ height: "600px", position: "relative" }}>
+          <InfiniteMenu items={items} />
+        </div>
       </section>
       <section id="main">
         <main>
