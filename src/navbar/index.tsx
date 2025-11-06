@@ -3,10 +3,9 @@ import styles from "./styles.module.css";
 
 interface NavbarProps {
   onContactClick?: () => void;
-  onFeedbackClick?: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onContactClick, onFeedbackClick }) => {
+const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -21,14 +20,6 @@ const Navbar: React.FC<NavbarProps> = ({ onContactClick, onFeedbackClick }) => {
     e.preventDefault();
     if (onContactClick) {
       onContactClick();
-    }
-    closeMobileMenu();
-  };
-
-  const handleFeedbackClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (onFeedbackClick) {
-      onFeedbackClick();
     }
     closeMobileMenu();
   };

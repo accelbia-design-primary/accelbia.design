@@ -7,7 +7,6 @@ import BentoGrid from "./bentoGrid";
 import ClientLogos from "./clientLogos";
 import Footer from "./footer";
 import Modal from "./modal";
-import SmoothScroll from "./smoothScroll";
 
 const App = () => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -21,35 +20,30 @@ const App = () => {
   return (
     <div className="app">
       <Background />
-      <SmoothScroll>
-        <Navbar
+      <Navbar onContactClick={openContactModal} />
+      <section id="landing">
+        <LandingScreen />
+      </section>
+      <section id="bento">
+        <BentoGrid />
+      </section>
+      <section id="main">
+        <main>
+          {/* Your app content goes here */}
+          <div className="content-placeholder">
+            <p className="vogue-display">Start building something amazing</p>
+          </div>
+        </main>
+      </section>
+      <section id="clients">
+        <ClientLogos />
+      </section>
+      <section id="footer">
+        <Footer
           onContactClick={openContactModal}
           onFeedbackClick={openFeedbackModal}
         />
-        <section id="landing">
-          <LandingScreen />
-        </section>
-        <section id="bento">
-          <BentoGrid />
-        </section>
-        <section id="main">
-          <main>
-            {/* Your app content goes here */}
-            <div className="content-placeholder">
-              <p className="vogue-display">Start building something amazing</p>
-            </div>
-          </main>
-        </section>
-        <section id="clients">
-          <ClientLogos />
-        </section>
-        <section id="footer">
-          <Footer
-            onContactClick={openContactModal}
-            onFeedbackClick={openFeedbackModal}
-          />
-        </section>
-      </SmoothScroll>
+      </section>
 
       {/* Contact Modal */}
       <Modal

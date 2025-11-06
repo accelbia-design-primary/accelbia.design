@@ -37,6 +37,12 @@ const ClientLogos = () => {
       hover: "/client_hovers/Unibreakers.png",
       url: "https://unibreakers.netlify.app/",
     },
+    {
+      name: "IBS",
+      src: "/clients/IBS.svg",
+      hover: "/client_hovers/IBS.png",
+      url: "https://ibsnehu2025.org/",
+    },
   ];
 
   // Randomly divide logos into two rows for mobile
