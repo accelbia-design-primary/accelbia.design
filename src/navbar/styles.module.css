@@ -1,0 +1,251 @@
+.navbar {
+  background-color: transparent;
+  border-bottom: 1px solid #c41d50;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  font-family: "Very Vogue Display", serif;
+  font-size: 1.5rem;
+  font-weight: normal;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.logoText {
+  color: #ffffff;
+}
+
+.logoDesign {
+  color: #888888;
+  transition: color 0.3s ease;
+}
+
+.logo:hover .logoDesign {
+  color: #c41d50;
+}
+
+/* Desktop Navigation */
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navLink {
+  font-family: "Very Vogue Text", serif;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.navLink:hover {
+  color: #c41d50;
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #c41d50;
+  transition: width 0.3s ease;
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+/* Mobile Menu Button */
+.mobileMenuButton {
+  display: none;
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: color 0.3s ease;
+  z-index: 1001;
+  position: relative;
+}
+
+.mobileMenuButton:hover {
+  color: #c41d50;
+}
+
+.menuIcon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.menuIconOpen {
+  transform: rotate(180deg);
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.overlayOpen {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Side Drawer */
+.sideDrawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 300px;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  border-left: 1px solid #c41d50;
+  z-index: 1000;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.sideDrawerOpen {
+  transform: translateX(0);
+}
+
+.drawerContent {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+}
+
+.drawerHeader {
+  padding: 0 2rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid rgba(196, 29, 80, 0.3);
+  padding-bottom: 2rem;
+}
+
+.drawerLogo {
+  font-family: "Very Vogue Display", serif;
+  font-size: 1.8rem;
+  font-weight: normal;
+}
+
+.drawerLogo .logoDesign {
+  color: #888888;
+  transition: color 0.3s ease;
+}
+
+.drawerLogo:hover .logoDesign {
+  color: #c41d50;
+}
+
+.drawerNav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 1rem;
+}
+
+.drawerNavLink {
+  font-family: "Very Vogue Text", serif;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 1rem;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  transform: translateX(20px);
+  opacity: 0;
+  animation: slideInRight 0.3s ease forwards;
+}
+
+.drawerNavLink:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.drawerNavLink:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.drawerNavLink:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.drawerNavLink:nth-child(4) {
+  animation-delay: 0.25s;
+}
+.drawerNavLink:nth-child(5) {
+  animation-delay: 0.3s;
+}
+
+.drawerNavLink:hover {
+  color: #ffffff;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  box-shadow: 0 0 15px rgba(196, 29, 80, 0.6), 0 0 30px rgba(196, 29, 80, 0.3);
+  transform: translateX(0);
+}
+
+@keyframes slideInRight {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .desktopNav {
+    display: none;
+  }
+
+  .mobileMenuButton {
+    display: block;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sideDrawer {
+    width: 280px;
+  }
+}

@@ -1,0 +1,206 @@
+.clientSection {
+  padding: 4rem 0;
+  background: transparent;
+  overflow: hidden;
+  position: relative;
+}
+
+.title {
+  font-family: "Very Vogue Display", serif;
+  font-style: italic;
+  font-size: 2rem;
+  font-weight: 300;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+}
+
+.scrollContainer {
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 1) 10%,
+    rgba(0, 0, 0, 1) 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 1) 10%,
+    rgba(0, 0, 0, 1) 90%,
+    transparent 100%
+  );
+}
+
+.logoRow {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  animation: scroll 30s linear infinite;
+  width: fit-content;
+}
+
+.logoRow.reverse {
+  animation: scrollReverse 25s linear infinite;
+}
+
+.logoItem {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: none;
+}
+
+.logoItem:hover {
+  /* Removed transform: translateY(-2px); */
+}
+
+.logoImage {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.logoItem:hover .logoImage {
+  opacity: 1;
+  filter: brightness(0) invert(1);
+}
+
+/* Desktop View */
+.desktopView {
+  display: block;
+}
+
+.mobileView {
+  display: none;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  .desktopView {
+    display: none;
+  }
+
+  .mobileView {
+    display: block;
+  }
+
+  .mobileView .scrollContainer {
+    margin-bottom: 1rem;
+  }
+
+  .mobileView .scrollContainer:last-child {
+    margin-bottom: 0;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .logoRow {
+    gap: 2rem;
+    animation-duration: 20s;
+  }
+
+  .logoRow.reverse {
+    animation-duration: 18s;
+  }
+
+  .logoItem {
+    min-width: 100px;
+    height: 60px;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .logoImage {
+    height: 40px;
+    width: auto;
+  }
+
+  .hoverImage {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .clientSection {
+    padding: 3rem 0;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .logoRow {
+    gap: 1.5rem;
+  }
+
+  .logoItem {
+    min-width: 80px;
+    height: 50px;
+    padding: 0.5rem 1rem;
+  }
+
+  .logoImage {
+    height: 30px;
+    width: auto;
+  }
+}
+
+/* Animations */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+@keyframes scrollReverse {
+  0% {
+    transform: translateX(-33.333%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.hoverImage {
+  position: absolute;
+  pointer-events: none;
+  z-index: 20;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+.hoverImageContent {
+  max-width: 200px;
+  max-height: 150px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  filter: drop-shadow(0 0 10px rgba(196, 29, 80, 0.3));
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

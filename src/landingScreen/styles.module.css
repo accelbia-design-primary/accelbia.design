@@ -1,0 +1,103 @@
+/* Google Fonts Import */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap");
+
+.landingScreen {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 5;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.content {
+  max-width: 900px;
+  padding: 0 2rem;
+  text-align: center;
+  pointer-events: auto;
+}
+
+.heroText {
+  font-family: "Very Vogue Display", serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: normal;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Individual character styling for animation */
+.heroText :global(.char) {
+  display: inline-block;
+  transform-origin: 50% 50% -50px;
+  perspective: 1000px;
+}
+
+.heroText :global(.word) {
+  display: inline-block;
+  margin-right: 0.3em;
+}
+
+.heroText :global(.line) {
+  display: block;
+}
+
+.designWord {
+  font-family: "Very Vogue Display", serif;
+  font-style: italic;
+  color: #c41d50;
+}
+
+.automationWord {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.indiaWord {
+  position: relative;
+  display: inline-block;
+  animation: indiaGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes indiaGlow {
+  0% {
+    text-shadow: 0 0 3px #ff9933, 0 0 6px #ff9933, 0 0 9px #ff9933,
+      0 0 12px #ff9933, 0 0 15px rgba(255, 153, 51, 0.8),
+      0 0 18px rgba(255, 153, 51, 0.6);
+  }
+  50% {
+    text-shadow: 0 0 3px #138808, 0 0 6px #138808, 0 0 9px #138808,
+      0 0 12px #138808, 0 0 15px rgba(19, 136, 8, 0.8),
+      0 0 18px rgba(19, 136, 8, 0.6), 0 0 21px rgba(19, 136, 8, 0.4);
+  }
+  100% {
+    text-shadow: 0 0 3px #ff9933, 0 0 6px #ff9933, 0 0 9px #ff9933,
+      0 0 12px #ff9933, 0 0 15px rgba(255, 153, 51, 0.8),
+      0 0 18px rgba(255, 153, 51, 0.6), 0 0 21px rgba(255, 153, 51, 0.4);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .content {
+    padding: 0 1.5rem;
+    text-align: left;
+  }
+
+  .heroText {
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 0 1rem;
+    text-align: left;
+  }
+}

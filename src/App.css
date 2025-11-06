@@ -1,0 +1,109 @@
+/* Custom font faces */
+@font-face {
+  font-family: "Very Vogue Display";
+  src: url("../public/fonts/nicky-laatz-very-vogue-display.otf")
+    format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Very Vogue Display";
+  src: url("../public/fonts/nicky-laatz-very-vogue-display-italic.otf")
+    format("opentype");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Very Vogue Text";
+  src: url("../public/fonts/nicky-laatz-very-vogue-text.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Very Vogue Text";
+  src: url("../public/fonts/nicky-laatz-very-vogue-text-italic.otf")
+    format("opentype");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Very Vogue Text", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  padding: 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #c41d50, #a01640);
+}
+
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  font-weight: normal;
+}
+
+header p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.content-placeholder {
+  text-align: center;
+}
+
+.content-placeholder p {
+  font-size: 1.5rem;
+  opacity: 0.7;
+}
+
+/* Typography utilities using your custom fonts */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Very Vogue Display", serif;
+}
+
+.vogue-display {
+  font-family: "Very Vogue Display", serif;
+}
+
+.vogue-text {
+  font-family: "Very Vogue Text", serif;
+}
