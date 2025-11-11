@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "generate-assets": "tsx scripts/generate-assets.ts",
+    "prebuild": "npm run generate-assets",
     "build": "rsbuild build",
     "dev": "rsbuild dev --open",
     "preview": "rsbuild preview"
@@ -19,9 +21,11 @@
   "devDependencies": {
     "@rsbuild/core": "^1.6.0",
     "@rsbuild/plugin-react": "^1.4.1",
+    "@types/node": "^24.10.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@types/three": "^0.181.0",
+    "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   }
 }

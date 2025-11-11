@@ -4,6 +4,7 @@ import { pluginReact } from "@rsbuild/plugin-react";
 export default defineConfig({
   plugins: [pluginReact()],
   html: {
+    title: "accelbia.design",
     favicon: "./public/favicon.ico",
     meta: {
       "theme-color": "#c41d50",
