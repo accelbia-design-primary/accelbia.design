@@ -20,12 +20,15 @@ const LandingScreen = () => {
         linesClass: "line",
       });
 
-      // Set initial state
+      // Set initial state for characters
       gsap.set(splitText.chars, {
         opacity: 0,
         y: 30,
         rotationX: -90,
       });
+
+      // Make the text element visible after setting up character states
+      gsap.set(textRef.current, { opacity: 1 });
 
       // Create timeline for animation
       const tl = gsap.timeline({ delay: 0.5 });
@@ -65,10 +68,12 @@ const LandingScreen = () => {
     <section className={styles.landingScreen} ref={containerRef}>
       <div className={styles.content}>
         <h1 className={styles.heroText} ref={textRef}>
-          A digital studio based in{" "}
-          <span className={styles.indiaWord}>India</span> leading an intelligent{" "}
-          <span className={styles.designWord}>design</span> and{" "}
-          <span className={styles.automationWord}>automation</span> revolution
+          <span className={styles.indiaWord}>India-based</span> digital studio
+          delivering expert full-stack web{" "}
+          <span className={styles.designWord}>design</span> and AI-powered{" "}
+          <span className={styles.automationWord}>automations</span> to help
+          businesses and events{" "}
+          <span className={styles.designWord}>thrive</span>
         </h1>
       </div>
     </section>

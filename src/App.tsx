@@ -1,49 +1,66 @@
 import "./App.css";
 import { useState } from "react";
+import { useAssetPreloader } from "./hooks/useAssetPreloader";
+import LoadingScreen from "./loadingScreen";
 import Navbar from "./navbar";
 import Background from "./background";
 import LandingScreen from "./landingScreen";
 import BentoGrid from "./bentoGrid";
 import InfiniteMenu from "./InfiniteMenu";
 import ClientLogos from "./clientLogos";
+import Testimonials from "./testimonials";
 import Footer from "./footer";
 import Modal from "./modal";
 
 const App = () => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
+  const { progress, isLoading } = useAssetPreloader();
 
   const openContactModal = () => setIsContactModalOpen(true);
   const closeContactModal = () => setIsContactModalOpen(false);
   const openFeedbackModal = () => setIsFeedbackModalOpen(true);
   const closeFeedbackModal = () => setIsFeedbackModalOpen(false);
 
+  const handleLoadingComplete = () => {
+    // Additional logic can be added here if needed
+  };
+
   const items = [
     {
-      image: "https://picsum.photos/300/300?grayscale",
+      image: "/projects/titp.png",
       link: "https://google.com/",
-      title: "Item 1",
-      description: "This is pretty cool, right?",
+      title: "This is the Proof",
+      description:
+        "A social media platform that verifies information to its root source, ensuring correctness and trustability.",
     },
     {
-      image: "https://picsum.photos/400/400?grayscale",
+      image: "/projects/2nd-deg.png",
       link: "https://google.com/",
-      title: "Item 2",
-      description: "This is pretty cool, right?",
+      title: "2nd\u00B0",
+      description:
+        "We connect people, through people you trust, to people you know you can trust.",
     },
-    {
-      image: "https://picsum.photos/500/500?grayscale",
-      link: "https://google.com/",
-      title: "Item 3",
-      description: "This is pretty cool, right?",
-    },
-    {
-      image: "https://picsum.photos/600/600?grayscale",
-      link: "https://google.com/",
-      title: "Item 4",
-      description: "This is pretty cool, right?",
-    },
+    // {
+    //   image: "/projects/titp.png",
+    //   link: "https://google.com/",
+    //   title: "Item 3",
+    //   description: "This is pretty cool, right?",
+    // },
+    // {
+    //   image: "/projects/titp.png",
+    //   link: "https://google.com/",
+    //   title: "Item 4",
+    //   description: "This is pretty cool, right?",
+    // },
   ];
+
+  // Show loading screen while assets are loading
+  if (isLoading) {
+    return (
+      <LoadingScreen progress={progress} onComplete={handleLoadingComplete} />
+    );
+  }
 
   return (
     <div className="app">
@@ -64,12 +81,15 @@ const App = () => {
         <main>
           {/* Your app content goes here */}
           <div className="content-placeholder">
-            <p className="vogue-display">Start building something amazing</p>
+            <p className="vogue-display">What we are working on</p>
           </div>
         </main>
       </section>
       <section id="clients">
         <ClientLogos />
+      </section>
+      <section id="testimonials">
+        <Testimonials />
       </section>
       <section id="footer">
         <Footer
@@ -145,7 +165,14 @@ const App = () => {
             <ContactForm />
           </div>
 
-          <p style={{ marginTop: "2rem", fontStyle: "italic", opacity: 0.8 }}>
+          <p
+            style={{
+              marginTop: "2rem",
+              fontStyle: "italic",
+              opacity: 0.8,
+              fontFamily: "Very Vogue Text, serif",
+            }}
+          >
             Let's create something extraordinary together.
           </p>
         </div>
@@ -266,7 +293,7 @@ const ContactForm: React.FC = () => {
       backgroundColor: "rgba(255, 255, 255, 0.1)",
       border: "1px solid rgba(255, 255, 255, 0.2)",
       color: "#ffffff",
-      fontFamily: "Very Vogue Text, serif",
+      fontFamily: "Poppins, sans-serif",
       fontSize: "0.9rem",
       transition: "all 0.3s ease",
     },
@@ -275,7 +302,7 @@ const ContactForm: React.FC = () => {
       backgroundColor: "rgba(255, 255, 255, 0.1)",
       border: "1px solid rgba(255, 255, 255, 0.2)",
       color: "#ffffff",
-      fontFamily: "Very Vogue Text, serif",
+      fontFamily: "Poppins, sans-serif",
       fontSize: "0.9rem",
       minHeight: "100px",
       resize: "vertical" as const,
@@ -286,14 +313,14 @@ const ContactForm: React.FC = () => {
       backgroundColor: isSubmitted ? "#4caf50" : "#c41d50",
       border: "none",
       color: "#ffffff",
-      fontFamily: "Very Vogue Text, serif",
+      fontFamily: "Poppins, sans-serif",
       fontSize: "0.9rem",
       cursor: isSubmitting || isSubmitted ? "not-allowed" : "pointer",
       transition: "all 0.3s ease",
       opacity: isSubmitting || isSubmitted ? 0.7 : 1,
     },
     message: {
-      fontFamily: "Very Vogue Text, serif",
+      fontFamily: "Poppins, sans-serif",
       fontSize: "0.85rem",
       padding: "0.5rem",
       transition: "all 0.3s ease",
@@ -479,7 +506,7 @@ const FeedbackForm: React.FC = () => {
       backgroundColor: "rgba(255, 255, 255, 0.1)",
       border: "1px solid rgba(255, 255, 255, 0.2)",
       color: "#ffffff",
-      fontFamily: "Very Vogue Text, serif",
+      fontFamily: "Poppins, sans-serif",
       fontSize: "0.9rem",
       transition: "all 0.3s ease",
     },
@@ -488,7 +515,7 @@ const FeedbackForm: React.FC = () => {
       backgroundColor: "rgba(255, 255, 255, 0.1)",
       border: "1px solid rgba(255, 255, 255, 0.2)",
       color: "#ffffff",
-      fontFamily: "Very Vogue Text, serif",
+      fontFamily: "Poppins, sans-serif",
       fontSize: "0.9rem",
       minHeight: "120px",
       resize: "vertical" as const,
@@ -499,14 +526,14 @@ const FeedbackForm: React.FC = () => {
       backgroundColor: isSubmitted ? "#4caf50" : "#c41d50",
       border: "none",
       color: "#ffffff",
-      fontFamily: "Very Vogue Text, serif",
+      fontFamily: "Poppins, sans-serif",
       fontSize: "0.9rem",
       cursor: isSubmitting || isSubmitted ? "not-allowed" : "pointer",
       transition: "all 0.3s ease",
       opacity: isSubmitting || isSubmitted ? 0.7 : 1,
     },
     message: {
-      fontFamily: "Very Vogue Text, serif",
+      fontFamily: "Poppins, sans-serif",
       fontSize: "0.85rem",
       padding: "0.5rem",
       transition: "all 0.3s ease",

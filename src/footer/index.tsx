@@ -89,7 +89,11 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onFeedbackClick }) => {
           <p className={styles.copyright}>© 2025 accelbia.design</p>
 
           <div className={styles.newsletter}>
-            <p className={styles.newsletterTitle}>Wanna stay posted?</p>
+            <p className={styles.newsletterTitle}>
+              Join the newsletter and you'll get the latest updates, fresh
+              inspiration, and teasers on what is coming next—delivered straight
+              to your inbox!
+            </p>
             <form onSubmit={subscribe} className={styles.newsletterForm}>
               <input
                 type="email"

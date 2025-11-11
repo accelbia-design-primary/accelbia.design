@@ -1,0 +1,502 @@
+.testimonialsSection {
+  padding: 80px 0;
+  background: transparent;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.sectionTitle {
+  font-family: "Very Vogue Display", serif;
+  font-size: 3rem;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 4rem;
+  font-weight: normal;
+}
+
+.scrollContainer {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  height: 400px;
+  mask: linear-gradient(
+    to right,
+    transparent,
+    white 10%,
+    white 90%,
+    transparent
+  );
+  -webkit-mask: linear-gradient(
+    to right,
+    transparent,
+    white 10%,
+    white 90%,
+    transparent
+  );
+}
+
+.scrollTrack {
+  display: flex;
+  gap: 2rem;
+  animation: infiniteScroll 60s linear infinite;
+  width: max-content;
+}
+
+.scrollTrack:hover {
+  animation-play-state: paused;
+}
+
+@keyframes infiniteScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.testimonialCard {
+  min-width: calc(50vw - 3rem);
+  max-width: 500px;
+  height: 300px;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.testimonialCard:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(196, 29, 80, 0.3);
+  box-shadow: 0 12px 40px rgba(196, 29, 80, 0.2);
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.15;
+  filter: blur(1px);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.testimonialCard:hover .backgroundImage {
+  opacity: 0.25;
+  filter: blur(0.5px);
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+.testimonialText {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 1.5rem 0;
+  flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reviewerInfo {
+  margin-top: auto;
+}
+
+.reviewerName {
+  font-family: "Very Vogue Display", serif;
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin: 0 0 0.25rem 0;
+  font-weight: normal;
+}
+
+.credentials {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  font-style: italic;
+}
+
+/* Mobile Carousel Styles */
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 400px;
+}
+
+.carouselTrack {
+  display: flex !important;
+  transition: transform 0.3s ease-in-out;
+  height: 100%;
+  will-change: transform;
+  animation: none !important; /* Disable infinite scroll animation */
+  width: auto !important; /* Override desktop width */
+}
+
+.carouselSlide {
+  min-width: 100vw !important;
+  max-width: 100vw !important;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.carouselSlide .testimonialCard {
+  width: calc(100vw - 2rem) !important;
+  max-width: calc(100vw - 2rem) !important;
+  min-width: auto !important;
+  height: 320px !important;
+  margin: 0 auto;
+}
+
+/* Navigation Dots */
+.carouselDots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.activeDot {
+  background-color: #c41d50 !important;
+  transform: scale(1.2);
+}
+
+/* Navigation Arrows */
+.carouselButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.carouselButton:hover {
+  background: rgba(196, 29, 80, 0.8);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carouselButton:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.prevButton {
+  left: 1rem;
+}
+
+.nextButton {
+  right: 1rem;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .testimonialsSection {
+    padding: 50px 0;
+  }
+
+  .container {
+    padding: 0 !important; /* Remove container padding for mobile carousel */
+  }
+
+  .sectionTitle {
+    font-size: 2.2rem;
+    margin-bottom: 2.5rem;
+    padding: 0 1rem; /* Add padding only to title */
+  }
+
+  .scrollContainer {
+    height: 400px;
+    mask: linear-gradient(
+      to right,
+      transparent,
+      white 5%,
+      white 95%,
+      transparent
+    );
+    -webkit-mask: linear-gradient(
+      to right,
+      transparent,
+      white 5%,
+      white 95%,
+      transparent
+    );
+  }
+
+  .scrollTrack {
+    gap: 1.5rem;
+    animation: infiniteScroll 80s linear infinite;
+  }
+
+  .testimonialCard {
+    min-width: calc(90vw - 2rem);
+    max-width: none;
+    height: 320px;
+  }
+
+  .content {
+    padding: 1.75rem;
+  }
+
+  .testimonialText {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    -webkit-line-clamp: 7;
+    margin-bottom: 1rem;
+  }
+
+  .reviewerName {
+    font-size: 1.15rem;
+  }
+
+  .credentials {
+    font-size: 0.85rem;
+  }
+
+  .carouselContainer {
+    height: 380px;
+    width: 100vw; /* Full viewport width */
+    margin: 0;
+    padding: 0;
+  }
+
+  .carouselSlide {
+    padding: 0 1rem !important;
+  }
+
+  .carouselSlide .testimonialCard {
+    width: calc(100vw - 2rem) !important;
+    max-width: calc(100vw - 2rem) !important;
+  }
+
+  .carouselButton {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .prevButton {
+    left: 0.5rem;
+  }
+
+  .nextButton {
+    right: 0.5rem;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonialsSection {
+    padding: 40px 0;
+  }
+
+  .container {
+    padding: 0 0.75rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .scrollContainer {
+    height: 380px;
+    mask: linear-gradient(
+      to right,
+      transparent,
+      white 3%,
+      white 97%,
+      transparent
+    );
+    -webkit-mask: linear-gradient(
+      to right,
+      transparent,
+      white 3%,
+      white 97%,
+      transparent
+    );
+  }
+
+  .scrollTrack {
+    gap: 1rem;
+    animation: infiniteScroll 90s linear infinite;
+  }
+
+  .testimonialCard {
+    min-width: calc(95vw - 1.5rem);
+    height: 350px;
+    border-radius: 12px;
+  }
+
+  .content {
+    padding: 1.5rem;
+  }
+
+  .testimonialText {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    -webkit-line-clamp: 8;
+    margin-bottom: 1rem;
+  }
+
+  .reviewerName {
+    font-size: 1.05rem;
+  }
+
+  .credentials {
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+
+  .carouselContainer {
+    height: 360px;
+  }
+
+  .carouselSlide {
+    padding: 0 0.25rem;
+  }
+
+  .carouselButton {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .prevButton {
+    left: 0.25rem;
+  }
+
+  .nextButton {
+    right: 0.25rem;
+  }
+
+  .carouselDots {
+    margin-top: 1rem;
+    gap: 0.4rem;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+@media (max-width: 360px) {
+  .testimonialsSection {
+    padding: 30px 0;
+  }
+
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .scrollContainer {
+    height: 360px;
+  }
+
+  .testimonialCard {
+    min-width: calc(98vw - 1rem);
+    height: 330px;
+    border-radius: 10px;
+  }
+
+  .content {
+    padding: 1.25rem;
+  }
+
+  .testimonialText {
+    font-size: 0.85rem;
+    line-height: 1.35;
+    -webkit-line-clamp: 7;
+  }
+
+  .reviewerName {
+    font-size: 1rem;
+  }
+
+  .credentials {
+    font-size: 0.75rem;
+  }
+
+  .carouselContainer {
+    height: 340px;
+  }
+
+  .carouselButton {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+}

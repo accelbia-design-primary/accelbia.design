@@ -38,11 +38,10 @@
   height: 60px;
   display: grid;
   place-items: center;
-  background: #5227ff;
+  background: #c41d50;
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  border: 5px solid #000;
 }
 
 .face-title {
