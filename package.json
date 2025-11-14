@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "homepage": "https://dev.accelbia.design",
   "scripts": {
     "generate-assets": "tsx scripts/generate-assets.ts",
     "prebuild": "npm run generate-assets",
     "build": "rsbuild build",
     "dev": "rsbuild dev --open",
-    "preview": "rsbuild preview"
+    "preview": "rsbuild preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "gl-matrix": "^3.4.4",
@@ -25,6 +28,7 @@
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@types/three": "^0.181.0",
+    "gh-pages": "^6.3.0",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   }
