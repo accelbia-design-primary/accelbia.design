@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 
 interface NavbarProps {
@@ -7,6 +7,16 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Trigger the fade-in animation after component mounts
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100); // Small delay for smoother appearance
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -26,7 +36,9 @@ const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
 
   return (
     <>
-      <nav className={styles.navbar}>
+      <nav
+        className={`${styles.navbar} ${isVisible ? styles.navbarVisible : ""}`}
+      >
         <div className={styles.container}>
           {/* Logo */}
           <div className={styles.logo}>

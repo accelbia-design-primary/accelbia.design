@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAssetPreloader } from "./hooks/useAssetPreloader";
 import LoadingScreen from "./loadingScreen";
 import Navbar from "./navbar";
@@ -16,6 +16,20 @@ const App = () => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
   const { progress, isLoading } = useAssetPreloader();
+
+  // Check for URL parameters on component mount
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const popoverParam = urlParams.get("popover");
+
+    if (popoverParam === "feedback") {
+      setIsFeedbackModalOpen(true);
+      // Clean up URL by removing the parameter
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.delete("popover");
+      window.history.replaceState({}, "", newUrl.toString());
+    }
+  }, []);
 
   const openContactModal = () => setIsContactModalOpen(true);
   const closeContactModal = () => setIsContactModalOpen(false);
@@ -427,6 +441,7 @@ const ContactForm: React.FC = () => {
 
 // Feedback Form Component
 const FeedbackForm: React.FC = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [feedback, setFeedback] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -460,8 +475,13 @@ const FeedbackForm: React.FC = () => {
       formData.append("access_key", "8efe6827-4c43-4142-bef5-43beb1467900");
       formData.append("subject", "Feedback from accelbia.design");
       formData.append("email", email || "anonymous@feedback.local");
-      formData.append("message", feedback);
-      formData.append("from_name", email || "Anonymous User");
+      formData.append(
+        "message",
+        `Name: ${name || "Anonymous"}\nEmail: ${
+          email || "Not provided"
+        }\n\nFeedback:\n${feedback}`
+      );
+      formData.append("from_name", name || email || "Anonymous User");
       formData.append("to_email", "feedback@accelbia.design");
 
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -473,6 +493,7 @@ const FeedbackForm: React.FC = () => {
 
       if (data.success) {
         setIsSubmitted(true);
+        setName("");
         setEmail("");
         setFeedback("");
         setStatusMessage(
@@ -553,6 +574,24 @@ const FeedbackForm: React.FC = () => {
   return (
     <>
       <form onSubmit={submitFeedbackForm} style={formStyles.form}>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Your Name (Optional)"
+          style={formStyles.input}
+          disabled={isSubmitting || isSubmitted}
+          onFocus={(e) => {
+            e.target.style.borderColor = "#c41d50";
+            e.target.style.backgroundColor = "rgba(255, 255, 255, 0.15)";
+            e.target.style.boxShadow = "0 0 10px rgba(196, 29, 80, 0.3)";
+          }}
+          onBlur={(e) => {
+            e.target.style.borderColor = "rgba(255, 255, 255, 0.2)";
+            e.target.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+            e.target.style.boxShadow = "none";
+          }}
+        />
         <input
           type="email"
           value={email}
