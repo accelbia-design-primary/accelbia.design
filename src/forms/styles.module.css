@@ -1,0 +1,209 @@
+/* Form Container Styles */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Input Styles */
+.input {
+  padding: 0.75rem 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-family: Poppins, sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.input:focus {
+  border-color: #c41d50;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 10px rgba(196, 29, 80, 0.3);
+  outline: none;
+}
+
+.input:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Textarea Styles */
+.textarea {
+  padding: 0.75rem 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-family: Poppins, sans-serif;
+  font-size: 0.9rem;
+  min-height: 100px;
+  resize: vertical;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.textarea:focus {
+  border-color: #c41d50;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 10px rgba(196, 29, 80, 0.3);
+  outline: none;
+}
+
+.textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.textareaLarge {
+  min-height: 120px;
+}
+
+/* Button Styles */
+.button {
+  padding: 0.75rem 1.5rem;
+  background-color: #c41d50;
+  border: none;
+  color: #ffffff;
+  font-family: Poppins, sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.button:hover {
+  background-color: #a01640;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(196, 29, 80, 0.4);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.buttonSuccess {
+  background-color: #4caf50;
+}
+
+.buttonSuccess:hover {
+  background-color: #45a049;
+}
+
+/* Status Message Styles */
+.message {
+  font-family: Poppins, sans-serif;
+  font-size: 0.85rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.messageSuccess {
+  color: #4caf50;
+  background-color: rgba(76, 175, 80, 0.1);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.messageError {
+  color: #ff6b6b;
+  background-color: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+/* Recruitment Form Specific Styles */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.positionsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.positionCard {
+  padding: 1.25rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.positionCard:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(196, 29, 80, 0.5);
+  transform: translateY(-2px);
+}
+
+.positionCardSelected {
+  background-color: rgba(196, 29, 80, 0.2);
+  border-color: #c41d50;
+}
+
+.positionCardSelected:hover {
+  background-color: rgba(196, 29, 80, 0.2);
+  border-color: #c41d50;
+  transform: translateY(0);
+}
+
+.positionHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.positionEmoji {
+  font-size: 1.5rem;
+}
+
+.positionTitle {
+  font-family: Very Vogue Display, serif;
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+.positionDescription {
+  font-family: Poppins, sans-serif;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.divider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 1rem 0;
+}
+
+.sectionTitle {
+  font-family: Very Vogue Display, serif;
+  font-size: 1.1rem;
+  color: #c41d50;
+  margin-bottom: 1rem;
+}
+
+.introText {
+  font-family: Poppins, sans-serif;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.5rem;
+}
+
+.footerText {
+  font-family: Poppins, sans-serif;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  font-style: italic;
+}
