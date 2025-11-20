@@ -1,6 +1,8 @@
 import "./App.css";
 import { useState, useEffect, useRef } from "react";
 import { useAssetPreloader } from "./hooks/useAssetPreloader";
+import { POPOVER_CONFIGS, cleanPopoverFromUrl } from "./configs/popovers";
+import type { PopoverType } from "./configs/popovers";
 import LoadingScreen from "./loadingScreen";
 import Navbar from "./navbar";
 import Background from "./background";
@@ -21,14 +23,21 @@ const App = () => {
   // Check for URL parameters on component mount
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const popoverParam = urlParams.get("popover");
+    const popoverParam = urlParams.get("popover") as PopoverType | null;
 
-    if (popoverParam === "feedback") {
-      setIsFeedbackModalOpen(true);
-      // Clean up URL by removing the parameter
-      const newUrl = new URL(window.location.href);
-      newUrl.searchParams.delete("popover");
-      window.history.replaceState({}, "", newUrl.toString());
+    if (popoverParam) {
+      // Map popover parameter to modal state setters
+      const modalSetters: Record<PopoverType, () => void> = {
+        feedback: () => setIsFeedbackModalOpen(true),
+        contact: () => setIsContactModalOpen(true),
+        careers: () => setIsRecruitmentModalOpen(true),
+      };
+
+      // Open the corresponding modal if valid popover type
+      if (popoverParam in POPOVER_CONFIGS) {
+        modalSetters[popoverParam]();
+        cleanPopoverFromUrl();
+      }
     }
   }, []);
 
@@ -783,7 +792,7 @@ const RecruitmentForm: React.FC = () => {
         `Position: ${position?.title}\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`
       );
       formData.append("from_name", name);
-      formData.append("to_email", "recruitment@accelbia.design");
+      formData.append("to_email", "careers@accelbia.design");
 
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
