@@ -18,6 +18,6 @@ export default defineConfig({
     },
   },
   output: {
-    assetPrefix: process.env.NODE_ENV === 'production' ? '/' : '/',
+    assetPrefix: process.env.NODE_ENV === "production" ? "/" : "/",
   },
 });

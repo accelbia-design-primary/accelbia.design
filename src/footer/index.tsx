@@ -5,9 +5,14 @@ import styles from "./styles.module.css";
 interface FooterProps {
   onContactClick?: () => void;
   onFeedbackClick?: () => void;
+  onRecruitmentClick?: () => void;
 }
 
-const Footer: React.FC<FooterProps> = ({ onContactClick, onFeedbackClick }) => {
+const Footer: React.FC<FooterProps> = ({
+  onContactClick,
+  onFeedbackClick,
+  onRecruitmentClick,
+}) => {
   const [email, setEmail] = useState("");
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -78,6 +83,13 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onFeedbackClick }) => {
     e.preventDefault();
     if (onFeedbackClick) {
       onFeedbackClick();
+    }
+  };
+
+  const handleRecruitmentClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onRecruitmentClick) {
+      onRecruitmentClick();
     }
   };
 
@@ -225,7 +237,11 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onFeedbackClick }) => {
             <a href="#blog" className={styles.quickLink}>
               Blog
             </a>
-            <a href="#work-for-us" className={styles.quickLink}>
+            <a
+              href="#work-for-us"
+              className={styles.quickLink}
+              onClick={handleRecruitmentClick}
+            >
               Work For Us
             </a>
           </nav>

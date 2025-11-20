@@ -3,9 +3,13 @@ import styles from "./styles.module.css";
 
 interface NavbarProps {
   onContactClick?: () => void;
+  onRecruitmentClick?: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
+const Navbar: React.FC<NavbarProps> = ({
+  onContactClick,
+  onRecruitmentClick,
+}) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -30,6 +34,14 @@ const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
     e.preventDefault();
     if (onContactClick) {
       onContactClick();
+    }
+    closeMobileMenu();
+  };
+
+  const handleRecruitmentClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onRecruitmentClick) {
+      onRecruitmentClick();
     }
     closeMobileMenu();
   };
@@ -61,7 +73,11 @@ const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
             <a href="#explore" className={styles.navLink}>
               Explore
             </a>
-            <a href="#work-for-us" className={styles.navLink}>
+            <a
+              href="#work-for-us"
+              className={styles.navLink}
+              onClick={handleRecruitmentClick}
+            >
               Work For Us
             </a>
             <a href="#blog" className={styles.navLink}>
@@ -145,7 +161,7 @@ const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
             <a
               href="#work-for-us"
               className={styles.drawerNavLink}
-              onClick={closeMobileMenu}
+              onClick={handleRecruitmentClick}
             >
               Work For Us
             </a>
