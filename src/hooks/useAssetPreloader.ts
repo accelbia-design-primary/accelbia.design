@@ -23,7 +23,6 @@ const FALLBACK_ASSETS: AssetManifest = {
     "/thumbnail.png",
     "/projects/titp.png",
     "/projects/2nd-deg.png",
-    "/projects/Artboard 1titp.png",
     "/clients/IBS.svg",
     "/clients/Potpourri.svg",
     "/clients/SK.svg",

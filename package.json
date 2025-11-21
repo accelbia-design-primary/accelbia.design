@@ -8,6 +8,7 @@
     "generate-assets": "tsx scripts/generate-assets.ts",
     "prebuild": "npm run generate-assets",
     "build": "rsbuild build",
+    "start": "rsbuild dev --open",
     "dev": "rsbuild dev --open",
     "preview": "rsbuild preview",
     "predeploy": "npm run build",

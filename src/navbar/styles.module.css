@@ -324,10 +324,13 @@
   margin: 2rem auto;
   padding: 0 2rem;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(280px, auto);
   gap: 1.5rem;
   height: calc(100% - 140px);
+  overflow: visible;
+  padding-bottom: 2rem;
+  align-items: start;
 }
 
 .bentoGrid.entering {
@@ -367,6 +370,9 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  min-height: 250px;
+  position: relative;
+  z-index: 1;
 }
 
 .bentoGrid.entering .bentoCard {
@@ -405,6 +411,7 @@
   border-color: rgba(196, 29, 80, 0.5);
   box-shadow: 0 8px 32px rgba(196, 29, 80, 0.2);
   transform: translateY(-4px);
+  z-index: 10;
 }
 
 .bentoTitle {
@@ -429,140 +436,26 @@
   animation-delay: 0.1s;
 }
 
-.bentoGrid.entering .contactCard {
-  grid-column: span 2;
-  animation-delay: 0.2s;
-}
-
-.bentoGrid.entering .exploreCard {
-  grid-column: span 1;
-  animation-delay: 0.3s;
-}
-
 .bentoGrid.entering .workCard {
-  grid-column: span 2;
-  cursor: pointer;
-  animation-delay: 0.4s;
-}
-
-.bentoGrid.entering .blogCard {
   grid-column: span 1;
-  animation-delay: 0.5s;
+  cursor: pointer;
+  animation-delay: 0.2s;
 }
 
 .bentoGrid.exiting .aboutCard {
   animation-delay: 0s;
 }
 
-.bentoGrid.exiting .contactCard {
-  animation-delay: 0.05s;
-}
-
-.bentoGrid.exiting .exploreCard {
-  animation-delay: 0.1s;
-}
-
 .bentoGrid.exiting .workCard {
-  animation-delay: 0.15s;
-}
-
-.bentoGrid.exiting .blogCard {
-  animation-delay: 0.2s;
+  animation-delay: 0.1s;
 }
 
 .aboutCard {
   grid-column: span 2;
 }
 
-.contactCard {
-  grid-column: span 2;
-}
-
-/* Contact Form Styles */
-.contactForm {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  flex: 1;
-}
-
-.emailInput {
-  padding: 0.75rem 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  color: #ffffff;
-  font-family: "Very Vogue Text", serif;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-}
-
-.emailInput:focus {
-  outline: none;
-  border-color: #c41d50;
-  background-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 10px rgba(196, 29, 80, 0.3);
-}
-
-.emailInput::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.contactIcons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin-top: auto;
-}
-
-.iconButton {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(196, 29, 80, 0.3);
-  border-radius: 12px;
-  padding: 1rem;
-  color: #ffffff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-}
-
-.iconButton:hover {
-  background: rgba(196, 29, 80, 0.2);
-  border-color: #c41d50;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(196, 29, 80, 0.3);
-}
-
-.iconButton svg {
-  transition: all 0.3s ease;
-}
-
-.iconButton:hover svg {
-  stroke: #c41d50;
-}
-
-.iconButtonDisabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.iconButtonDisabled:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(196, 29, 80, 0.3);
-  transform: none;
-  box-shadow: none;
-}
-
-.exploreCard {
-  grid-column: span 1;
-}
-
 .workCard {
-  grid-column: span 2;
+  grid-column: span 1;
   cursor: pointer;
 }
 
@@ -582,11 +475,6 @@
 .workButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(196, 29, 80, 0.4);
-}
-
-/* Blog Card */
-.blogCard {
-  grid-column: span 1;
 }
 
 /* Disabled bento cards */
@@ -625,4 +513,78 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
   /* ...existing code... */
+}
+
+/* Tablet and Small Desktop - Bento Grid Responsive */
+@media (max-width: 1024px) {
+  .bentoGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 0 1.5rem;
+    grid-auto-rows: minmax(250px, auto);
+  }
+
+  .aboutCard {
+    grid-column: span 1;
+  }
+
+  .workCard {
+    grid-column: span 1;
+  }
+
+  .bentoCard {
+    padding: 1.5rem;
+    min-height: 200px;
+  }
+
+  .bentoTitle {
+    font-size: 1.3rem;
+  }
+
+  .bentoText {
+    font-size: 0.9rem;
+  }
+
+  .workButton {
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .bentoGrid {
+    padding: 0 1rem;
+    gap: 0.85rem;
+  }
+
+  .bentoCard {
+    padding: 1.25rem;
+    min-height: 180px;
+  }
+
+  .bentoTitle {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .bentoText {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 820px) {
+  .bentoGrid {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+
+  .aboutCard,
+  .workCard {
+    grid-column: span 1;
+  }
+
+  .bentoCard {
+    min-height: 160px;
+  }
 }
