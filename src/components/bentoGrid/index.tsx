@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "./styles.module.css";
@@ -9,6 +9,10 @@ gsap.registerPlugin(ScrollTrigger);
 const BentoGrid = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
 
   useEffect(() => {
     if (containerRef.current && gridRef.current) {
@@ -52,6 +56,65 @@ const BentoGrid = () => {
     }
   }, []);
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (!validateEmail(email)) {
+      setStatusMessage("Please enter a valid email address.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setStatusMessage("");
+
+    try {
+      const formData = new FormData();
+      formData.append("access_key", "8efe6827-4c43-4142-bef5-43beb1467900");
+      formData.append(
+        "subject",
+        "Contact Inquiry from accelbia.design - Bento Grid"
+      );
+      formData.append("email", email);
+      formData.append(
+        "message",
+        "Contact request submitted via Bento Grid email input."
+      );
+      formData.append("from_name", email);
+      formData.append("to_email", "inquiry@accelbia.design");
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setIsSubmitted(true);
+        setEmail("");
+        setStatusMessage("Thanks! We'll be in touch soon.");
+        // Reset form after 5 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setStatusMessage("");
+        }, 5000);
+      } else {
+        console.error("Error:", data);
+        setStatusMessage("Failed to send. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      setStatusMessage("An error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className={styles.bentoSection} ref={containerRef}>
       <div className={styles.container}>
@@ -73,8 +136,33 @@ const BentoGrid = () => {
             <p>Streamlined processes</p>
           </div>
           <div className={`${styles.bentoBox} ${styles.box5}`}>
-            <h3>Results</h3>
-            <p>Delivering exceptional outcomes for our clients</p>
+            <h3>Get In Touch</h3>
+            <p>Let's discuss how we can help your business grow</p>
+            <form onSubmit={handleEmailSubmit} className={styles.emailForm}>
+              <div className={styles.inputWrapper}>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className={styles.emailInput}
+                  required
+                  disabled={isSubmitting || isSubmitted}
+                />
+                <button
+                  type="submit"
+                  className={`${styles.submitButton} ${
+                    isSubmitted ? styles.submitButtonSuccess : ""
+                  }`}
+                  disabled={isSubmitting || isSubmitted}
+                >
+                  {isSubmitting ? "..." : isSubmitted ? "✓" : "→"}
+                </button>
+              </div>
+              {statusMessage && (
+                <p className={styles.statusMessage}>{statusMessage}</p>
+              )}
+            </form>
           </div>
         </div>
       </div>
