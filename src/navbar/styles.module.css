@@ -287,31 +287,6 @@
   }
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .desktopNav {
-    display: none;
-  }
-
-  .mobileMenuButton {
-    display: block;
-  }
-
-  .container {
-    padding: 0 1rem;
-  }
-
-  .logo {
-    font-size: 1.3rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .sideDrawer {
-    width: 280px;
-  }
-}
-
 /* Hide desktop nav when expanded */
 .desktopNavHidden {
   opacity: 0;
@@ -430,15 +405,11 @@
   margin: 0;
 }
 
-/* Add staggered animation delays */
 .bentoGrid.entering .aboutCard {
-  grid-column: span 2;
   animation-delay: 0.1s;
 }
 
 .bentoGrid.entering .workCard {
-  grid-column: span 1;
-  cursor: pointer;
   animation-delay: 0.2s;
 }
 
@@ -477,42 +448,29 @@
   box-shadow: 0 8px 24px rgba(196, 29, 80, 0.4);
 }
 
-/* Disabled bento cards */
-.bentoCardDisabled {
-  opacity: 0.5;
-  cursor: not-allowed !important;
-  pointer-events: auto;
-}
-
-.bentoCardDisabled:hover {
-  background: rgba(255, 255, 255, 0.03) !important;
-  border-color: rgba(196, 29, 80, 0.2) !important;
-  box-shadow: none !important;
-  transform: none !important;
-}
-
-.bentoCardDisabled .bentoTitle {
-  color: #666666;
-}
-
-.placeholderContent {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  opacity: 0.5;
-}
-
-.placeholderContent p {
-  font-family: "Very Vogue Text", serif;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 1rem;
-  font-style: italic;
-}
-
 /* Mobile Responsive */
 @media (max-width: 768px) {
-  /* ...existing code... */
+  .desktopNav {
+    display: none;
+  }
+
+  .mobileMenuButton {
+    display: block;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sideDrawer {
+    width: 280px;
+  }
 }
 
 /* Tablet and Small Desktop - Bento Grid Responsive */
@@ -524,10 +482,7 @@
     grid-auto-rows: minmax(250px, auto);
   }
 
-  .aboutCard {
-    grid-column: span 1;
-  }
-
+  .aboutCard,
   .workCard {
     grid-column: span 1;
   }

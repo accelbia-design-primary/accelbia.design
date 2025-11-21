@@ -51,10 +51,6 @@ const App = () => {
   const openRecruitmentModal = () => setIsRecruitmentModalOpen(true);
   const closeRecruitmentModal = () => setIsRecruitmentModalOpen(false);
 
-  const handleLoadingComplete = () => {
-    // Additional logic can be added here if needed
-  };
-
   const items = [
     {
       image: "/projects/titp.png",
@@ -75,7 +71,7 @@ const App = () => {
   // Show loading screen while assets are loading
   if (isLoading) {
     return (
-      <LoadingScreen progress={progress} onComplete={handleLoadingComplete} />
+      <LoadingScreen progress={progress} onComplete={() => {}} />
     );
   }
 

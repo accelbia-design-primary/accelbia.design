@@ -56,23 +56,6 @@ body {
   flex-direction: column;
 }
 
-header {
-  padding: 2rem;
-  text-align: center;
-  background: linear-gradient(135deg, #c41d50, #a01640);
-}
-
-header h1 {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-  font-weight: normal;
-}
-
-header p {
-  font-size: 1.2rem;
-  opacity: 0.9;
-}
-
 main {
   flex: 1;
   display: flex;

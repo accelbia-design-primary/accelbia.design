@@ -97,18 +97,11 @@ const Testimonials: React.FC = () => {
     const checkMobile = () => {
       const isMobileView = window.innerWidth <= 768;
       setIsMobile(isMobileView);
-      console.log(
-        "Mobile detection:",
-        isMobileView,
-        "Width:",
-        window.innerWidth
-      ); // Debug log
     };
 
     checkMobile();
     window.addEventListener("resize", checkMobile);
 
-    // Also check on component mount
     const timeout = setTimeout(checkMobile, 100);
 
     return () => {
