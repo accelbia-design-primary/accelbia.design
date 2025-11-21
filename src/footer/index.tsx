@@ -234,7 +234,11 @@ const Footer: React.FC<FooterProps> = ({
             >
               Feedback
             </a>
-            <a href="#blog" className={styles.quickLink}>
+            <a
+              href="#blog"
+              className={`${styles.quickLink} ${styles.quickLinkDisabled}`}
+              onClick={(e) => e.preventDefault()}
+            >
               Blog
             </a>
             <a

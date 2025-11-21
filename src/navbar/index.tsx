@@ -20,6 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({
   const [expandedHeight, setExpandedHeight] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [email, setEmail] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState(false);
   const navbarRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -138,6 +139,16 @@ const Navbar: React.FC<NavbarProps> = ({
     // Handle email submission
     console.log("Email submitted:", email);
     setEmail("");
+    setIsEmailValid(false);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setIsEmailValid(emailRegex.test(value));
   };
 
   const handleMailClick = () => {
@@ -184,7 +195,11 @@ const Navbar: React.FC<NavbarProps> = ({
             >
               Contact
             </a>
-            <a href="#explore" className={styles.navLink}>
+            <a
+              href="#explore"
+              className={`${styles.navLink} ${styles.navLinkDisabled}`}
+              onClick={(e) => e.preventDefault()}
+            >
               Explore
             </a>
             <a
@@ -194,7 +209,11 @@ const Navbar: React.FC<NavbarProps> = ({
             >
               Work For Us
             </a>
-            <a href="#blog" className={styles.navLink}>
+            <a
+              href="#blog"
+              className={`${styles.navLink} ${styles.navLinkDisabled}`}
+              onClick={(e) => e.preventDefault()}
+            >
               Blog
             </a>
           </div>
@@ -252,7 +271,7 @@ const Navbar: React.FC<NavbarProps> = ({
                 <input
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={handleEmailChange}
                   placeholder="Your email address"
                   className={styles.emailInput}
                   required
@@ -297,12 +316,36 @@ const Navbar: React.FC<NavbarProps> = ({
                       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                     </svg>
                   </button>
+                  <button
+                    type="submit"
+                    className={`${styles.iconButton} ${
+                      !isEmailValid ? styles.iconButtonDisabled : ""
+                    }`}
+                    aria-label="Submit email"
+                    disabled={!isEmailValid}
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <line x1="22" y1="2" x2="11" y2="13"></line>
+                      <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                  </button>
                 </div>
               </form>
             </div>
 
             {/* Explore Widget */}
-            <div className={`${styles.bentoCard} ${styles.exploreCard}`}>
+            <div
+              className={`${styles.bentoCard} ${styles.exploreCard} ${styles.bentoCardDisabled}`}
+            >
               <h3 className={styles.bentoTitle}>Explore</h3>
               <div className={styles.placeholderContent}>
                 <p>Coming Soon</p>
@@ -319,7 +362,9 @@ const Navbar: React.FC<NavbarProps> = ({
             </div>
 
             {/* Blog Widget */}
-            <div className={`${styles.bentoCard} ${styles.blogCard}`}>
+            <div
+              className={`${styles.bentoCard} ${styles.blogCard} ${styles.bentoCardDisabled}`}
+            >
               <h3 className={styles.bentoTitle}>Blog</h3>
               <div className={styles.placeholderContent}>
                 <p>Coming Soon</p>
@@ -368,8 +413,8 @@ const Navbar: React.FC<NavbarProps> = ({
             </a>
             <a
               href="#explore"
-              className={styles.drawerNavLink}
-              onClick={closeMobileMenu}
+              className={`${styles.drawerNavLink} ${styles.drawerNavLinkDisabled}`}
+              onClick={(e) => e.preventDefault()}
             >
               Explore
             </a>
@@ -382,8 +427,8 @@ const Navbar: React.FC<NavbarProps> = ({
             </a>
             <a
               href="#blog"
-              className={styles.drawerNavLink}
-              onClick={closeMobileMenu}
+              className={`${styles.drawerNavLink} ${styles.drawerNavLinkDisabled}`}
+              onClick={(e) => e.preventDefault()}
             >
               Blog
             </a>

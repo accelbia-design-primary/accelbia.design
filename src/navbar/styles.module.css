@@ -33,6 +33,7 @@
   backdrop-filter: blur(20px);
   border-bottom: 2px solid #c41d50;
   box-shadow: 0 0 50px rgba(196, 29, 80, 0.3);
+  opacity: 1 !important;
 }
 
 .container {
@@ -104,6 +105,22 @@
 
 .navLink:hover::after {
   width: 100%;
+}
+
+/* Disabled nav links */
+.navLinkDisabled {
+  color: #666666 !important;
+  opacity: 0.5;
+  cursor: not-allowed !important;
+  pointer-events: auto;
+}
+
+.navLinkDisabled::after {
+  display: none;
+}
+
+.navLinkDisabled:hover {
+  color: #666666 !important;
 }
 
 /* Mobile Menu Button */
@@ -248,6 +265,21 @@
   transform: translateX(0);
 }
 
+/* Disabled drawer nav links */
+.drawerNavLinkDisabled {
+  color: #666666 !important;
+  opacity: 0.5;
+  cursor: not-allowed !important;
+}
+
+.drawerNavLinkDisabled:hover {
+  color: #666666 !important;
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  transform: translateX(20px);
+}
+
 @keyframes slideInRight {
   to {
     transform: translateX(0);
@@ -308,22 +340,18 @@
 
 @keyframes fadeInBento {
   from {
-    opacity: 0;
     transform: translateY(20px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
   }
 }
 
 @keyframes fadeOutBento {
   from {
-    opacity: 1;
     transform: translateY(0);
   }
   to {
-    opacity: 0;
     transform: translateY(-20px);
   }
 }
@@ -450,6 +478,85 @@
   grid-column: span 2;
 }
 
+/* Contact Form Styles */
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+.emailInput {
+  padding: 0.75rem 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: "Very Vogue Text", serif;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.emailInput:focus {
+  outline: none;
+  border-color: #c41d50;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 10px rgba(196, 29, 80, 0.3);
+}
+
+.emailInput::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.contactIcons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.iconButton {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(196, 29, 80, 0.3);
+  border-radius: 12px;
+  padding: 1rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.iconButton:hover {
+  background: rgba(196, 29, 80, 0.2);
+  border-color: #c41d50;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(196, 29, 80, 0.3);
+}
+
+.iconButton svg {
+  transition: all 0.3s ease;
+}
+
+.iconButton:hover svg {
+  stroke: #c41d50;
+}
+
+.iconButtonDisabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.iconButtonDisabled:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(196, 29, 80, 0.3);
+  transform: none;
+  box-shadow: none;
+}
+
 .exploreCard {
   grid-column: span 1;
 }
@@ -480,6 +587,24 @@
 /* Blog Card */
 .blogCard {
   grid-column: span 1;
+}
+
+/* Disabled bento cards */
+.bentoCardDisabled {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+  pointer-events: auto;
+}
+
+.bentoCardDisabled:hover {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-color: rgba(196, 29, 80, 0.2) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.bentoCardDisabled .bentoTitle {
+  color: #666666;
 }
 
 .placeholderContent {

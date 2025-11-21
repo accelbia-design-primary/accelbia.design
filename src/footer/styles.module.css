@@ -238,6 +238,20 @@
   transform: translateX(5px);
 }
 
+/* Disabled quick links */
+.quickLinkDisabled {
+  color: #666666 !important;
+  opacity: 0.5;
+  cursor: not-allowed !important;
+  pointer-events: auto;
+}
+
+.quickLinkDisabled:hover {
+  color: #666666 !important;
+  border-left-color: transparent !important;
+  transform: none !important;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .container {
