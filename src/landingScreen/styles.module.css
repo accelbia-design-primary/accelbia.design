@@ -11,6 +11,7 @@
   z-index: 5;
   overflow: hidden;
   pointer-events: none;
+  user-select: none;
 }
 
 .content {
@@ -18,6 +19,7 @@
   padding: 0 2rem;
   text-align: center;
   pointer-events: auto;
+  user-select: none;
 }
 
 .heroText {
@@ -29,6 +31,7 @@
   margin: 0;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   opacity: 0; /* Hide initially to prevent flash */
+  user-select: none;
 }
 
 /* Individual character styling for animation */

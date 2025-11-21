@@ -12,21 +12,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
   onComplete,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const loaderRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (loaderRef.current) {
-      // Simple pulsing animation for the loader
-      gsap.to(loaderRef.current, {
-        scale: 1.2,
-        duration: 1,
-        ease: "power2.inOut",
-        yoyo: true,
-        repeat: -1,
-      });
-    }
-  }, []);
 
   useEffect(() => {
     if (progressBarRef.current) {
@@ -56,10 +42,6 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
   return (
     <div className={styles.loadingScreen} ref={containerRef}>
       <div className={styles.content}>
-        <div ref={loaderRef} className={styles.loader}>
-          <div className={styles.loaderRing}></div>
-        </div>
-
         <div className={styles.progressContainer}>
           <div className={styles.progressBar}>
             <div ref={progressBarRef} className={styles.progressFill} />

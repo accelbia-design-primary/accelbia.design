@@ -7,12 +7,32 @@
   backdrop-filter: blur(10px);
   opacity: 0;
   transform: translateY(-20px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out,
+    height 0.8s cubic-bezier(0.4, 0, 0.2, 1), background 0.8s ease,
+    backdrop-filter 0.8s ease, box-shadow 0.8s ease;
+  height: 80px;
+  overflow: hidden;
 }
 
 .navbarVisible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.navbarExpanded {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0.85) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  backdrop-filter: blur(20px);
+  border-bottom: 2px solid #c41d50;
+  box-shadow: 0 0 50px rgba(196, 29, 80, 0.3);
 }
 
 .container {
@@ -23,6 +43,8 @@
   align-items: center;
   justify-content: space-between;
   height: 80px;
+  position: relative;
+  z-index: 101;
 }
 
 /* Logo */
@@ -256,4 +278,226 @@
   .sideDrawer {
     width: 280px;
   }
+}
+
+/* Hide desktop nav when expanded */
+.desktopNavHidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Bento Grid Styles */
+.bentoGrid {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 1.5rem;
+  height: calc(100% - 140px);
+}
+
+.bentoGrid.entering {
+  animation: fadeInBento 0.6s ease forwards;
+}
+
+.bentoGrid.exiting {
+  animation: fadeOutBento 0.6s ease forwards;
+}
+
+@keyframes fadeInBento {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutBento {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.bentoCard {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(196, 29, 80, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.bentoGrid.entering .bentoCard {
+  animation: fadeInCard 0.5s ease forwards;
+  opacity: 0;
+}
+
+.bentoGrid.exiting .bentoCard {
+  animation: fadeOutCard 0.4s ease forwards;
+}
+
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeOutCard {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+}
+
+.bentoCard:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(196, 29, 80, 0.5);
+  box-shadow: 0 8px 32px rgba(196, 29, 80, 0.2);
+  transform: translateY(-4px);
+}
+
+.bentoTitle {
+  font-family: "Very Vogue Display", serif;
+  font-size: 1.5rem;
+  color: #c41d50;
+  margin: 0 0 1rem 0;
+  font-weight: normal;
+}
+
+.bentoText {
+  font-family: "Very Vogue Text", serif;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Add staggered animation delays */
+.bentoGrid.entering .aboutCard {
+  grid-column: span 2;
+  animation-delay: 0.1s;
+}
+
+.bentoGrid.entering .contactCard {
+  grid-column: span 2;
+  animation-delay: 0.2s;
+}
+
+.bentoGrid.entering .exploreCard {
+  grid-column: span 1;
+  animation-delay: 0.3s;
+}
+
+.bentoGrid.entering .workCard {
+  grid-column: span 2;
+  cursor: pointer;
+  animation-delay: 0.4s;
+}
+
+.bentoGrid.entering .blogCard {
+  grid-column: span 1;
+  animation-delay: 0.5s;
+}
+
+.bentoGrid.exiting .aboutCard {
+  animation-delay: 0s;
+}
+
+.bentoGrid.exiting .contactCard {
+  animation-delay: 0.05s;
+}
+
+.bentoGrid.exiting .exploreCard {
+  animation-delay: 0.1s;
+}
+
+.bentoGrid.exiting .workCard {
+  animation-delay: 0.15s;
+}
+
+.bentoGrid.exiting .blogCard {
+  animation-delay: 0.2s;
+}
+
+.aboutCard {
+  grid-column: span 2;
+}
+
+.contactCard {
+  grid-column: span 2;
+}
+
+.exploreCard {
+  grid-column: span 1;
+}
+
+.workCard {
+  grid-column: span 2;
+  cursor: pointer;
+}
+
+.workButton {
+  background: linear-gradient(135deg, #c41d50, #a01640);
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  color: #ffffff;
+  font-family: "Very Vogue Display", serif;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: auto;
+}
+
+.workButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(196, 29, 80, 0.4);
+}
+
+/* Blog Card */
+.blogCard {
+  grid-column: span 1;
+}
+
+.placeholderContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  opacity: 0.5;
+}
+
+.placeholderContent p {
+  font-family: "Very Vogue Text", serif;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  /* ...existing code... */
 }
