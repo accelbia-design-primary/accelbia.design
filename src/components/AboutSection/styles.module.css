@@ -1,0 +1,284 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    backdrop-filter 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.6s;
+  overflow-y: auto;
+}
+
+.overlay.open {
+  opacity: 1;
+  visibility: visible;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(30px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    backdrop-filter 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0s;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  position: relative;
+}
+
+.closeButton {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+.closeButton:hover {
+  background: rgba(196, 29, 80, 0.3);
+  border-color: rgba(196, 29, 80, 0.5);
+  color: #c41d50;
+  transform: scale(1.1) rotate(90deg);
+}
+
+.closeButton:active {
+  transform: scale(0.95) rotate(90deg);
+}
+
+.closeIcon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.content {
+  max-width: 1000px;
+  width: 100%;
+  opacity: 0;
+  transform: scale(0.95);
+  animation: contentFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.overlay.open .content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.title {
+  font-family: "Very Vogue Display", serif;
+  font-style: italic;
+  font-size: 5rem;
+  color: #c41d50;
+  text-align: center;
+  margin-bottom: 4rem;
+  font-weight: normal;
+  letter-spacing: 0.05em;
+}
+
+.textSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.paragraph {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: justify;
+  margin: 0;
+}
+
+.paragraph :global(.word) {
+  display: inline-block;
+  margin-right: 0.35em;
+}
+
+.brandName {
+  font-family: "Very Vogue Display", serif;
+  color: #c41d50;
+  font-weight: normal;
+  letter-spacing: 0.02em;
+  font-size: 2rem;
+  display: inline;
+}
+
+.ctaButton {
+  margin-top: 3rem;
+  padding: 1.2rem 3rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #ffffff;
+  background: linear-gradient(135deg, #c41d50 0%, #a01640 100%);
+  border: 2px solid #c41d50;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 15px rgba(196, 29, 80, 0.3);
+  opacity: 1;
+}
+
+.ctaButton:hover {
+  background: linear-gradient(135deg, #a01640 0%, #c41d50 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(196, 29, 80, 0.5);
+  border-color: #ffffff;
+}
+
+.ctaButton:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(196, 29, 80, 0.4);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 1024px) {
+  .title {
+    font-size: 4rem;
+    margin-bottom: 3rem;
+  }
+
+  .paragraph {
+    font-size: 1.3rem;
+    line-height: 1.9;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 3rem 1.5rem;
+  }
+
+  .closeButton {
+    width: 50px;
+    height: 50px;
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .closeIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .title {
+    font-size: 3rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .textSection {
+    gap: 2rem;
+  }
+
+  .paragraph {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    text-align: left;
+  }
+
+  .highlight {
+    padding: 0.05em 0.2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 2rem 1rem;
+  }
+
+  .closeButton {
+    width: 44px;
+    height: 44px;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .closeIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .title {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .textSection {
+    gap: 1.5rem;
+  }
+
+  .paragraph {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .paragraph {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+}
+
+/* Scrollbar styling */
+.overlay::-webkit-scrollbar {
+  width: 8px;
+}
+
+.overlay::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.overlay::-webkit-scrollbar-thumb {
+  background: rgba(196, 29, 80, 0.5);
+  border-radius: 4px;
+}
+
+.overlay::-webkit-scrollbar-thumb:hover {
+  background: rgba(196, 29, 80, 0.8);
+}

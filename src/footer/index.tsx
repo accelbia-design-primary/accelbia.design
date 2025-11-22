@@ -1,17 +1,25 @@
 import { useState } from "react";
 import { SocialIcon } from "react-social-icons";
 import styles from "./styles.module.css";
+import {
+  isNavigationEnabled,
+  isNavigationDisabled,
+} from "../configs/navigation";
 
 interface FooterProps {
   onContactClick?: () => void;
   onFeedbackClick?: () => void;
   onRecruitmentClick?: () => void;
+  onSecretsClick?: () => void;
+  onAboutClick?: () => void;
 }
 
 const Footer: React.FC<FooterProps> = ({
   onContactClick,
   onFeedbackClick,
   onRecruitmentClick,
+  onSecretsClick,
+  onAboutClick,
 }) => {
   const [email, setEmail] = useState("");
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
@@ -90,6 +98,20 @@ const Footer: React.FC<FooterProps> = ({
     e.preventDefault();
     if (onRecruitmentClick) {
       onRecruitmentClick();
+    }
+  };
+
+  const handleSecretsClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onSecretsClick) {
+      onSecretsClick();
+    }
+  };
+
+  const handleAboutClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onAboutClick) {
+      onAboutClick();
     }
   };
 
@@ -217,37 +239,61 @@ const Footer: React.FC<FooterProps> = ({
           <h3 className={styles.quickLinksTitle}>Quick Links</h3>
           <div className={styles.separator}></div>
           <nav className={styles.quickLinks}>
-            <a href="#about" className={styles.quickLink}>
-              About
-            </a>
-            <a
-              href="#contact"
-              className={styles.quickLink}
-              onClick={handleContactClick}
-            >
-              Contact
-            </a>
-            <a
-              href="#feedback"
-              className={styles.quickLink}
-              onClick={handleFeedbackClick}
-            >
-              Feedback
-            </a>
-            <a
-              href="#blog"
-              className={`${styles.quickLink} ${styles.quickLinkDisabled}`}
-              onClick={(e) => e.preventDefault()}
-            >
-              Blog
-            </a>
-            <a
-              href="#work-for-us"
-              className={styles.quickLink}
-              onClick={handleRecruitmentClick}
-            >
-              Work For Us
-            </a>
+            {isNavigationEnabled("about") && (
+              <a
+                href="#about"
+                className={styles.quickLink}
+                onClick={handleAboutClick}
+              >
+                About
+              </a>
+            )}
+            {isNavigationEnabled("contact") && (
+              <a
+                href="#contact"
+                className={styles.quickLink}
+                onClick={handleContactClick}
+              >
+                Contact
+              </a>
+            )}
+            {isNavigationEnabled("feedback") && (
+              <a
+                href="#feedback"
+                className={styles.quickLink}
+                onClick={handleFeedbackClick}
+              >
+                Feedback
+              </a>
+            )}
+            {isNavigationEnabled("secrets") && (
+              <a
+                href="#secrets"
+                className={`${styles.quickLink} ${
+                  isNavigationDisabled("secrets")
+                    ? styles.footerLinkDisabled
+                    : ""
+                }`}
+                onClick={(e) => {
+                  if (isNavigationDisabled("secrets")) {
+                    e.preventDefault();
+                  } else {
+                    handleSecretsClick(e);
+                  }
+                }}
+              >
+                Secrets
+              </a>
+            )}
+            {isNavigationEnabled("workForUs") && (
+              <a
+                href="#work-for-us"
+                className={styles.quickLink}
+                onClick={handleRecruitmentClick}
+              >
+                Work For Us
+              </a>
+            )}
           </nav>
         </div>
       </div>

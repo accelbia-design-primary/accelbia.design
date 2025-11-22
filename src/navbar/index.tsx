@@ -1,14 +1,24 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./styles.module.css";
+import {
+  isNavigationEnabled,
+  isNavigationDisabled,
+} from "../configs/navigation";
 
 interface NavbarProps {
   onContactClick?: () => void;
   onRecruitmentClick?: () => void;
+  onLogoClick?: () => void;
+  onSecretsClick?: () => void;
+  onAboutClick?: () => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({
   onContactClick,
   onRecruitmentClick,
+  onLogoClick,
+  onSecretsClick,
+  onAboutClick,
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -132,6 +142,28 @@ const Navbar: React.FC<NavbarProps> = ({
     closeMobileMenu();
   };
 
+  const handleLogoClick = () => {
+    if (onLogoClick) {
+      onLogoClick();
+    }
+  };
+
+  const handleSecretsClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onSecretsClick) {
+      onSecretsClick();
+    }
+    closeMobileMenu();
+  };
+
+  const handleAboutClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onAboutClick) {
+      onAboutClick();
+    }
+    closeMobileMenu();
+  };
+
   return (
     <>
       <nav
@@ -149,7 +181,8 @@ const Navbar: React.FC<NavbarProps> = ({
           {/* Logo */}
           <div
             className={styles.logo}
-            onClick={() => (window.location.href = "/")}
+            onClick={handleLogoClick}
+            style={{ cursor: "pointer" }}
           >
             <span className={styles.logoText}>accelbia</span>
             <span className={styles.logoDesign}>.design</span>
@@ -161,37 +194,63 @@ const Navbar: React.FC<NavbarProps> = ({
               isExpanded ? styles.desktopNavHidden : ""
             }`}
           >
-            <a href="#about" className={styles.navLink}>
-              About
-            </a>
-            <a
-              href="#contact"
-              className={styles.navLink}
-              onClick={handleContactClick}
-            >
-              Contact
-            </a>
-            <a
-              href="#explore"
-              className={`${styles.navLink} ${styles.navLinkDisabled}`}
-              onClick={(e) => e.preventDefault()}
-            >
-              Explore
-            </a>
-            <a
-              href="#work-for-us"
-              className={styles.navLink}
-              onClick={handleRecruitmentClick}
-            >
-              Work For Us
-            </a>
-            <a
-              href="#blog"
-              className={`${styles.navLink} ${styles.navLinkDisabled}`}
-              onClick={(e) => e.preventDefault()}
-            >
-              Blog
-            </a>
+            {isNavigationEnabled("about") && (
+              <a
+                href="#about"
+                className={styles.navLink}
+                onClick={handleAboutClick}
+              >
+                About
+              </a>
+            )}
+            {isNavigationEnabled("contact") && (
+              <a
+                href="#contact"
+                className={styles.navLink}
+                onClick={handleContactClick}
+              >
+                Contact
+              </a>
+            )}
+            {isNavigationEnabled("explore") && (
+              <a
+                href="#explore"
+                className={`${styles.navLink} ${
+                  isNavigationDisabled("explore") ? styles.navLinkDisabled : ""
+                }`}
+                onClick={(e) =>
+                  isNavigationDisabled("explore") && e.preventDefault()
+                }
+              >
+                Explore
+              </a>
+            )}
+            {isNavigationEnabled("workForUs") && (
+              <a
+                href="#work-for-us"
+                className={styles.navLink}
+                onClick={handleRecruitmentClick}
+              >
+                Work For Us
+              </a>
+            )}
+            {isNavigationEnabled("secrets") && (
+              <a
+                href="#secrets"
+                className={`${styles.navLink} ${
+                  isNavigationDisabled("secrets") ? styles.navLinkDisabled : ""
+                }`}
+                onClick={(e) => {
+                  if (isNavigationDisabled("secrets")) {
+                    e.preventDefault();
+                  } else {
+                    handleSecretsClick(e);
+                  }
+                }}
+              >
+                Secrets
+              </a>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -230,13 +289,17 @@ const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             {/* About Widget */}
-            <div className={`${styles.bentoCard} ${styles.aboutCard}`}>
+            <div
+              className={`${styles.bentoCard} ${styles.aboutCard}`}
+              onClick={handleAboutClick}
+              style={{ cursor: "pointer" }}
+            >
               <h3 className={styles.bentoTitle}>About</h3>
               <p className={styles.bentoText}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                accelbia.design is a focused, one-person studio supported by
+                trusted partners who share a single vision: to cut through noise
+                and complexity to build technology and design with purpose. We
+                stand for intentional impact over volume, precision over flash.
               </p>
             </div>
 
@@ -268,48 +331,78 @@ const Navbar: React.FC<NavbarProps> = ({
       >
         <div className={styles.drawerContent}>
           <div className={styles.drawerHeader}>
-            <div className={styles.drawerLogo}>
+            <div
+              className={styles.drawerLogo}
+              onClick={handleLogoClick}
+              style={{ cursor: "pointer" }}
+            >
               <span className={styles.logoText}>accelbia</span>
               <span className={styles.logoDesign}>.design</span>
             </div>
           </div>
 
           <nav className={styles.drawerNav}>
-            <a
-              href="#about"
-              className={styles.drawerNavLink}
-              onClick={closeMobileMenu}
-            >
-              About
-            </a>
-            <a
-              href="#contact"
-              className={styles.drawerNavLink}
-              onClick={handleContactClick}
-            >
-              Contact
-            </a>
-            <a
-              href="#explore"
-              className={`${styles.drawerNavLink} ${styles.drawerNavLinkDisabled}`}
-              onClick={(e) => e.preventDefault()}
-            >
-              Explore
-            </a>
-            <a
-              href="#work-for-us"
-              className={styles.drawerNavLink}
-              onClick={handleRecruitmentClick}
-            >
-              Work For Us
-            </a>
-            <a
-              href="#blog"
-              className={`${styles.drawerNavLink} ${styles.drawerNavLinkDisabled}`}
-              onClick={(e) => e.preventDefault()}
-            >
-              Blog
-            </a>
+            {isNavigationEnabled("about") && (
+              <a
+                href="#about"
+                className={styles.drawerNavLink}
+                onClick={handleAboutClick}
+              >
+                About
+              </a>
+            )}
+            {isNavigationEnabled("contact") && (
+              <a
+                href="#contact"
+                className={styles.drawerNavLink}
+                onClick={handleContactClick}
+              >
+                Contact
+              </a>
+            )}
+            {isNavigationEnabled("explore") && (
+              <a
+                href="#explore"
+                className={`${styles.drawerNavLink} ${
+                  isNavigationDisabled("explore")
+                    ? styles.drawerNavLinkDisabled
+                    : ""
+                }`}
+                onClick={(e) =>
+                  isNavigationDisabled("explore") && e.preventDefault()
+                }
+              >
+                Explore
+              </a>
+            )}
+            {isNavigationEnabled("workForUs") && (
+              <a
+                href="#work-for-us"
+                className={styles.drawerNavLink}
+                onClick={handleRecruitmentClick}
+              >
+                Work For Us
+              </a>
+            )}
+            {isNavigationEnabled("secrets") && (
+              <a
+                href="#secrets"
+                className={`${styles.drawerNavLink} ${
+                  isNavigationDisabled("secrets")
+                    ? styles.drawerNavLinkDisabled
+                    : ""
+                }`}
+                onClick={(e) => {
+                  if (isNavigationDisabled("secrets")) {
+                    e.preventDefault();
+                  } else {
+                    handleSecretsClick(e);
+                  }
+                }}
+              >
+                Secrets
+              </a>
+            )}
           </nav>
         </div>
       </div>

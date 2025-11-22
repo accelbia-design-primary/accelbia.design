@@ -81,6 +81,51 @@ const loadAssetManifest = async (): Promise<AssetManifest> => {
   }
 };
 
+// Function to check if an image is already cached
+const isImageCached = (src: string): Promise<boolean> => {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      // If image loads immediately, it's likely cached
+      resolve(img.complete && img.naturalHeight !== 0);
+    };
+    img.onerror = () => resolve(false);
+    img.src = src;
+
+    // If already complete, it's cached
+    if (img.complete) {
+      resolve(img.naturalHeight !== 0);
+    }
+  });
+};
+
+// Function to check if a font is already loaded
+const isFontLoaded = (fontFamily: string): boolean => {
+  return document.fonts.check(`12px "${fontFamily}"`);
+};
+
+// Function to check if all assets are already cached
+const areAssetsAlreadyLoaded = async (
+  manifest: AssetManifest
+): Promise<boolean> => {
+  // Check if fonts are loaded
+  const fontsLoaded = manifest.fonts.every((font) => isFontLoaded(font.family));
+
+  if (!fontsLoaded) {
+    return false;
+  }
+
+  // Check a sample of critical images (first 5)
+  const criticalImages = manifest.images.slice(0, 5);
+  const imageChecks = await Promise.all(
+    criticalImages.map((src) => isImageCached(src))
+  );
+
+  // If most critical images are cached, assume all are loaded
+  const cachedCount = imageChecks.filter(Boolean).length;
+  return cachedCount >= Math.ceil(criticalImages.length * 0.8); // 80% threshold
+};
+
 export const useAssetPreloader = (): UseAssetPreloaderReturn => {
   const [progress, setProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -134,6 +179,18 @@ export const useAssetPreloader = (): UseAssetPreloaderReturn => {
   useEffect(() => {
     const loadAssets = async () => {
       try {
+        const manifest = await loadAssetManifest();
+
+        // Check if assets are already loaded
+        const alreadyLoaded = await areAssetsAlreadyLoaded(manifest);
+
+        if (alreadyLoaded) {
+          // Assets already cached, skip loading screen
+          setProgress(100);
+          setIsLoading(false);
+          return;
+        }
+
         const assets = await getAllAssets();
         const totalAssets = assets.length;
         let loadedAssets = 0;

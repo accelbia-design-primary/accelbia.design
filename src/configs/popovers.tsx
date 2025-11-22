@@ -1,4 +1,4 @@
-export type PopoverType = "feedback" | "contact" | "careers";
+export type PopoverType = "feedback" | "contact" | "careers" | "secrets";
 
 export interface PopoverConfig {
   type: PopoverType;
@@ -32,6 +32,12 @@ export const POPOVER_CONFIGS: Record<PopoverType, PopoverConfig> = {
     title: "Career Opportunities",
     description:
       "Explore our open positions and join us in building exceptional digital experiences.",
+  },
+  secrets: {
+    type: "secrets",
+    urlParam: "secrets",
+    title: "The Secret Cove",
+    description: "Enter your credentials to access the secret cove.",
   },
 };
 

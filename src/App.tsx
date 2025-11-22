@@ -4,6 +4,7 @@ import { useAssetPreloader } from "./hooks/useAssetPreloader";
 import { POPOVER_CONFIGS, cleanPopoverFromUrl } from "./configs/popovers";
 import type { PopoverType } from "./configs/popovers";
 import LoadingScreen from "./components/loadingScreen";
+import TransitionOverlay from "./components/TransitionOverlay";
 import Navbar from "./navbar";
 import Background from "./components/background";
 import LandingScreen from "./landingScreen";
@@ -13,14 +14,19 @@ import ClientLogos from "./components/clientLogos";
 import Testimonials from "./components/testimonials";
 import Footer from "./footer";
 import Modal from "./components/modal";
+import AboutSection from "./components/AboutSection";
 import ContactForm from "./forms/ContactForm";
 import FeedbackForm from "./forms/FeedbackForm";
 import RecruitmentForm from "./forms/RecruitmentForm";
+import SecretsForm from "./forms/SecretsForm";
 
 const App = () => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
   const [isRecruitmentModalOpen, setIsRecruitmentModalOpen] = useState(false);
+  const [isSecretsModalOpen, setIsSecretsModalOpen] = useState(false);
+  const [isAboutSectionOpen, setIsAboutSectionOpen] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const { progress, isLoading } = useAssetPreloader();
 
   // Check for URL parameters on component mount
@@ -34,6 +40,7 @@ const App = () => {
         feedback: () => setIsFeedbackModalOpen(true),
         contact: () => setIsContactModalOpen(true),
         careers: () => setIsRecruitmentModalOpen(true),
+        secrets: () => setIsSecretsModalOpen(true),
       };
 
       // Open the corresponding modal if valid popover type
@@ -50,6 +57,25 @@ const App = () => {
   const closeFeedbackModal = () => setIsFeedbackModalOpen(false);
   const openRecruitmentModal = () => setIsRecruitmentModalOpen(true);
   const closeRecruitmentModal = () => setIsRecruitmentModalOpen(false);
+  const openSecretsModal = () => setIsSecretsModalOpen(true);
+  const closeSecretsModal = () => setIsSecretsModalOpen(false);
+  const openAboutSection = () => setIsAboutSectionOpen(true);
+  const closeAboutSection = () => setIsAboutSectionOpen(false);
+
+  const handleLogoClick = () => {
+    // Check if already at root
+    if (window.location.pathname === "/" && window.scrollY === 0) {
+      return; // Already at root, do nothing
+    }
+
+    // Start transition animation
+    setIsTransitioning(true);
+  };
+
+  const handleTransitionComplete = () => {
+    // Navigate to root after animation completes
+    window.location.href = "/";
+  };
 
   const items = [
     {
@@ -70,17 +96,22 @@ const App = () => {
 
   // Show loading screen while assets are loading
   if (isLoading) {
-    return (
-      <LoadingScreen progress={progress} onComplete={() => {}} />
-    );
+    return <LoadingScreen progress={progress} onComplete={() => {}} />;
   }
 
   return (
     <div className="app">
+      <TransitionOverlay
+        isActive={isTransitioning}
+        onComplete={handleTransitionComplete}
+      />
       <Background />
       <Navbar
         onContactClick={openContactModal}
         onRecruitmentClick={openRecruitmentModal}
+        onLogoClick={handleLogoClick}
+        onSecretsClick={openSecretsModal}
+        onAboutClick={openAboutSection}
       />
       <section id="landing">
         <LandingScreen />
@@ -112,8 +143,17 @@ const App = () => {
           onContactClick={openContactModal}
           onFeedbackClick={openFeedbackModal}
           onRecruitmentClick={openRecruitmentModal}
+          onSecretsClick={openSecretsModal}
+          onAboutClick={openAboutSection}
         />
       </section>
+
+      {/* About Section */}
+      <AboutSection
+        isOpen={isAboutSectionOpen}
+        onClose={closeAboutSection}
+        onContactClick={openContactModal}
+      />
 
       {/* Contact Modal */}
       <Modal
@@ -235,6 +275,16 @@ const App = () => {
         maxWidth="700px"
       >
         <RecruitmentForm />
+      </Modal>
+
+      {/* Secrets Modal */}
+      <Modal
+        isOpen={isSecretsModalOpen}
+        onClose={closeSecretsModal}
+        title="The Secret Cove"
+        maxWidth="500px"
+      >
+        <SecretsForm />
       </Modal>
     </div>
   );
